@@ -10,12 +10,13 @@ public class BallPhysics : MonoBehaviour
     private float tParam;
     private Vector3 objectPosition;
     private bool coroutineAllowed;
-
+    private bool hasHit = false;
     public float speedModifier = 0.5f;
+    public static Vector3 returnStartPosition;
 
     void Start()
     {
-        t = trajectory[0].gameObject.GetComponent<Trajectory>();
+        t = trajectory[0].GetComponentInParent<Trajectory>();
         path = 0;
         tParam = 0f;
         coroutineAllowed = true;
@@ -40,6 +41,8 @@ public class BallPhysics : MonoBehaviour
 
         while (tParam < 1)
         {
+            if (coroutineAllowed)
+                yield break;
             tParam += Time.deltaTime * speedModifier;
 
             objectPosition = Mathf.Pow(1 - tParam, 3) * p0 + 3 * Mathf.Pow(1 - tParam, 2) * tParam * p1 + 3 * (1 - tParam) * Mathf.Pow(tParam, 2) * p2 + Mathf.Pow(tParam, 3) * p3;
@@ -55,12 +58,31 @@ public class BallPhysics : MonoBehaviour
         if (path > trajectory.Length - 1)
         {
             path = 0;
-
-            //if statement for when collision with paddle and ball occurs here
-            t.MovePoints();
         }
-
         coroutineAllowed = true;
-        
+        hasHit = false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!hasHit)
+        {
+            if (collision.gameObject.CompareTag("Paddle") || collision.gameObject.CompareTag("Wall")) 
+            {
+                hasHit = true;
+                returnStartPosition = transform.position;
+                t.MovePoints();
+                path = 0;
+                tParam = 0;
+                coroutineAllowed = true;
+                Debug.Log("Collision");
+            }
+        }
+    }
+
+    public void ResetBall()
+    {
+        transform.position = new Vector3(0, 3.5f, 5);
+        coroutineAllowed = true;
     }
 }
