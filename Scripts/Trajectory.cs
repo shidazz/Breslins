@@ -20,10 +20,10 @@ public class Trajectory : MonoBehaviour
             Gizmos.DrawSphere(gizmosPosition1, 0.25f);
             Gizmos.DrawSphere(gizmosPosition2, 0.25f);
         }
-        Gizmos.DrawLine(new Vector3(controlPoints[0].position.x, controlPoints[0].position.y, controlPoints[0].position.z), new Vector3(controlPoints[1].position.x, controlPoints[1].position.y, controlPoints[1].position.z));
-        Gizmos.DrawLine(new Vector3(controlPoints[2].position.x, controlPoints[2].position.y, controlPoints[2].position.z), new Vector3(controlPoints[3].position.x, controlPoints[3].position.y, controlPoints[3].position.z));
-        Gizmos.DrawLine(new Vector3(controlPoints[4].position.x, controlPoints[4].position.y, controlPoints[4].position.z), new Vector3(controlPoints[5].position.x, controlPoints[5].position.y, controlPoints[5].position.z));
-        Gizmos.DrawLine(new Vector3(controlPoints[6].position.x, controlPoints[6].position.y, controlPoints[6].position.z), new Vector3(controlPoints[7].position.x, controlPoints[7].position.y, controlPoints[7].position.z));
+        for (int i = 0; i < 7; i++)
+        {
+            Gizmos.DrawLine(new Vector3(controlPoints[i].position.x, controlPoints[i].position.y, controlPoints[i].position.z), new Vector3(controlPoints[i+1].position.x, controlPoints[i+1].position.y, controlPoints[i+1].position.z));
+        }
     }
 
     public void MovePoints()   
