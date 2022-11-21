@@ -9,13 +9,12 @@ public class BallPhysics : MonoBehaviour
     private Vector3 objectPosition;
     private bool coroutineAllowed = true;
     private bool hasHit = false;
-    private int counter = 0;
     public float speedModifier = 0.5f;
     public static Vector3 returnStartPosition;
 
     void Update()
     {
-        if (coroutineAllowed && counter == 0)
+        if (coroutineAllowed)
         {
             StartCoroutine(GoByTheRoute());
         }
@@ -23,8 +22,6 @@ public class BallPhysics : MonoBehaviour
 
     private IEnumerator GoByTheRoute()
     {
-        Debug.Log("Route Began");
-        counter++;
         coroutineAllowed = false;
 
         Vector3[] p = new Vector3[8];
@@ -52,8 +49,6 @@ public class BallPhysics : MonoBehaviour
             }
             tParam = 0;
         }
-        Debug.Log("Route Traveled");
-        counter = 0;
     }
 
     private void OnCollisionEnter(Collision collision)
