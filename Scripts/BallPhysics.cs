@@ -65,7 +65,7 @@ public class BallPhysics : MonoBehaviour
                 trajectory.MovePoints();
                 tParam = 0;
                 coroutineAllowed = true;
-                speedModifier += 0.1f;
+                speedModifier += 0.05f;
             }
         }
     }
