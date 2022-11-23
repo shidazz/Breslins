@@ -26,19 +26,19 @@ public class Trajectory : MonoBehaviour
         }
     }
 
-    public void MovePoints()   
+    public void MovePoints(float landPointX, float spin, string tableSide)
     {
-        float direction;
+        float travelDirection;
         float bounceDistance;
         float bounceModifier = 0.5f;
 
-        if (controlPoints[0].position.z < 0)
+        if (tableSide == "right")
         {
             point1Range.z = Random.Range(0, 2);
             point2Range.z = Random.Range(-2, 0);
             landPointRange.z = Random.Range(-4.5f, -2.5f);
         }
-        if (controlPoints[0].position.z > 0)
+        if (tableSide == "left")
         {
             point1Range.z = Random.Range(-2, 0);
             point2Range.z = Random.Range(0, 2);
@@ -47,15 +47,15 @@ public class Trajectory : MonoBehaviour
 
         controlPoints[0].position = BallPhysics.returnStartPosition;
 
-        landPointRange.x = Random.Range(-2.5f, 2.5f);
+        landPointRange.x = landPointX;
         controlPoints[3].position = new Vector3(landPointRange.x, 2.5f, landPointRange.z);
 
-        direction = landPointRange.x - controlPoints[0].position.x;
+        travelDirection = landPointRange.x - controlPoints[0].position.x;
 
         point1Range.x = (controlPoints[0].position.x + controlPoints[3].position.x) / 2;
         controlPoints[1].position = new Vector3(point1Range.x, Random.Range(4, 5), point1Range.z);
 
-        point2Range.x = controlPoints[1].position.x + direction * 0.3f;
+        point2Range.x = controlPoints[1].position.x + travelDirection * 0.3f;
         controlPoints[2].position = new Vector3(point2Range.x, Random.Range(4, 5), point2Range.z);
 
         controlPoints[4].position = controlPoints[3].position;

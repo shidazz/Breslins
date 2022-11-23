@@ -1,20 +1,18 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
     private PlayerInput playerInput;
     private PlayerInput.InMatchActions inMatch;
     private Player player;
-    private BallPhysics ball;
 
     private void Awake()
     {
         playerInput = new PlayerInput();
         inMatch = playerInput.InMatch;
         player = GetComponent<Player>();
-        ball = GameObject.Find("Ball").GetComponent<BallPhysics>();
-        inMatch.ResetBall.performed += ctx => ball.ResetBall();
+        inMatch.ResetBall.performed += ctx => player.ResetBall();
+        inMatch.Swing.performed += ctx => StartCoroutine(player.Swing(inMatch.Swing.ReadValue<float>(), inMatch.Spin.ReadValue<float>()));
     }
 
     private void Update()

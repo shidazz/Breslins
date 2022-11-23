@@ -7,9 +7,9 @@ public class BallPhysics : MonoBehaviour
 
     private float tParam = 0f;
     private Vector3 objectPosition;
-    private bool coroutineAllowed = true;
-    private bool hasHit = false;
     private int counter = 0;
+    public bool coroutineAllowed = false;
+    public bool hasHit = false;
     public float speedModifier = 0.5f;
     public static Vector3 returnStartPosition;
 
@@ -58,21 +58,14 @@ public class BallPhysics : MonoBehaviour
     {
         if (!hasHit)
         {
-            if (collision.gameObject.CompareTag("Paddle") || collision.gameObject.CompareTag("Wall")) 
+            if (collision.gameObject.CompareTag("Paddle")) 
             {
                 hasHit = true;
                 returnStartPosition = transform.position;
-                trajectory.MovePoints();
                 tParam = 0;
                 coroutineAllowed = true;
                 speedModifier += 0.05f;
             }
         }
-    }
-
-    public void ResetBall()
-    {
-        coroutineAllowed = true;
-        speedModifier = 1;
     }
 }
