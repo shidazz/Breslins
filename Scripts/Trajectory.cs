@@ -6,9 +6,6 @@ public class Trajectory : MonoBehaviour
 
     private Vector3 gizmosPosition1;
     private Vector3 gizmosPosition2;
-    private Vector3 point1Range;
-    private Vector3 point2Range;
-    private Vector3 landPointRange;
 
     private void OnDrawGizmos()
     {
@@ -26,46 +23,60 @@ public class Trajectory : MonoBehaviour
         }
     }
 
-    public void MovePoints(float landPointX, float spin, string tableSide)
+    public void MovePoints(string tableSide, string rallyTurn, float spin)
     {
         float travelDirection;
         float bounceDistance;
-        float bounceModifier = 0.5f;
-
-        if (tableSide == "right")
-        {
-            point1Range.z = Random.Range(0, 2);
-            point2Range.z = Random.Range(-2, 0);
-            landPointRange.z = Random.Range(-4.5f, -2.5f);
-        }
-        if (tableSide == "left")
-        {
-            point1Range.z = Random.Range(-2, 0);
-            point2Range.z = Random.Range(0, 2);
-            landPointRange.z = Random.Range(2.5f, 4.5f);
-        }
+        float bounceModifier = 0.6f;
+        Vector3 startPoint;
+        Vector3 p1 = new Vector3(0, 4.5f, -1.5f);
+        Vector3 p2 = new Vector3(0, 4.5f, 1);
+        Vector3 landPoint = new Vector3(0, 2.5f, 0);
+        Vector3 p5;
+        Vector3 p6;
 
         controlPoints[0].position = BallPhysics.returnStartPosition;
+        startPoint = controlPoints[0].position;
 
-        landPointRange.x = landPointX;
-        controlPoints[3].position = new Vector3(landPointRange.x, 2.5f, landPointRange.z);
+        if (tableSide == "left")
+            landPoint.x = Random.Range(-2.5f, 0);
+        if (tableSide == "right")
+            landPoint.x = Random.Range(2.5f, 0);
 
-        travelDirection = landPointRange.x - controlPoints[0].position.x;
+        if (rallyTurn == "opponent")
+        {
+            p1.z = 1.5f;
+            p2.z = -1;
+            landPoint.z = Random.Range(-4.5f, -2.5f);
+        }
+        if (rallyTurn == "player")
+        {
+            p1.z = -1.5f;
+            p2.z = 1;
+            landPoint.z = Random.Range(2.5f, 4.5f);
+        }
 
-        point1Range.x = (controlPoints[0].position.x + controlPoints[3].position.x) / 2;
-        controlPoints[1].position = new Vector3(point1Range.x, Random.Range(4, 5), point1Range.z);
+        controlPoints[3].position = landPoint;
 
-        point2Range.x = controlPoints[1].position.x + travelDirection * 0.3f;
-        controlPoints[2].position = new Vector3(point2Range.x, Random.Range(4, 5), point2Range.z);
 
-        controlPoints[4].position = controlPoints[3].position;
+        travelDirection = landPoint.x - startPoint.x;
 
-        bounceDistance = (((controlPoints[1].position.z - controlPoints[0].position.z) + (controlPoints[3].position.z - controlPoints[2].position.z)) / 2) * bounceModifier;
+        p1.x = (startPoint.x + landPoint.x) / 2;
+        controlPoints[1].position = p1;
 
-        controlPoints[5].position = new Vector3(controlPoints[3].position.x + (controlPoints[3].position.x - controlPoints[2].position.x), controlPoints[2].position.y - 0.5f, controlPoints[3].position.z + bounceDistance);
+        p2.x = p1.x + travelDirection * 0.2f;
+        controlPoints[2].position = p2;
+
+        controlPoints[4].position = landPoint;
+
+        bounceDistance = (((p1.z - startPoint.z) + (landPoint.z - p2.z)) / 2) * bounceModifier;
+
+        p5 = new Vector3(landPoint.x + travelDirection * 0.2f, p2.y - 0.8f, landPoint.z + bounceDistance);
+        controlPoints[5].position = p5;
         
-        controlPoints[6].position = new Vector3(controlPoints[5].position.x + (controlPoints[5].position.x - controlPoints[4].position.x), controlPoints[5].position.y - 0.5f, controlPoints[5].position.z + (controlPoints[5].position.z - controlPoints[4].position.z));
-        
-        controlPoints[7].position = new Vector3(controlPoints[6].position.x + (controlPoints[6].position.x - controlPoints[5].position.x), 1, controlPoints[6].position.z + (controlPoints[6].position.z - controlPoints[5].position.z));
+        p6 = new Vector3(p5.x + (p5.x - landPoint.x), p5.y - 0.5f, p5.z + (p5.z - landPoint.z));
+        controlPoints[6].position = p6;
+
+        controlPoints[7].position = new Vector3(p6.x + (p6.x - p5.x), 1, p6.z + (p6.z - p5.z));
     }
 }

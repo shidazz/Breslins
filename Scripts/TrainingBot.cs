@@ -35,7 +35,7 @@ public class TrainingBot : MonoBehaviour
         transform.position = lerpPosition;
         Debug.Log("Moved to ball");
         yield return new WaitUntil(() => ball.hasHit);
-        trajectory.MovePoints(Random.Range(-2f, 2f), 0, "right");
+        trajectory.MovePoints("any", "opponent", 0);
         Debug.Log("Bot hit ball");
         moving = false;
     }

@@ -6,12 +6,12 @@ public class Player : MonoBehaviour
     [SerializeField] private Trajectory trajectory;
     [SerializeField] private BallPhysics ball;
 
-    private float speed = 5f;
+    public  float speed = 5f;
     private AnimationController anim;
 
     private void Awake()
     {
-        anim = GetComponent<AnimationController>();
+        anim = GetComponentInChildren<AnimationController>();
     }
 
     public void Move(float input)
@@ -26,9 +26,9 @@ public class Player : MonoBehaviour
         yield return new WaitUntil(() => ball.hasHit);
         Debug.Log("Hit");
         if (direction < 0)
-            trajectory.MovePoints(Random.Range(-2.5f, 0), 0, "left");
+            trajectory.MovePoints("left", "player", spin);
         if (direction > 0)
-            trajectory.MovePoints(Random.Range(0, 2.5f), 0, "left");
+            trajectory.MovePoints("right", "player", spin);
     }
 
     public void ResetBall()
