@@ -3,10 +3,12 @@ using UnityEngine;
 public class Trajectory : MonoBehaviour
 {
     [SerializeField] public Transform[] controlPoints;
+    [SerializeField] private BallPhysics ball;
 
     private Vector3 gizmosPosition1;
     private Vector3 gizmosPosition2;
 
+    /*
     private void OnDrawGizmos()
     {
         for (float t = 0; t <= 1; t += 0.05f)
@@ -22,9 +24,11 @@ public class Trajectory : MonoBehaviour
             Gizmos.DrawLine(new Vector3(controlPoints[i].position.x, controlPoints[i].position.y, controlPoints[i].position.z), new Vector3(controlPoints[i+1].position.x, controlPoints[i+1].position.y, controlPoints[i+1].position.z));
         }
     }
+    */
 
-    public void MovePoints(string tableSide, string rallyTurn, float spin)
+    public void MovePoints(string tableSide, string returningSide, float spin)
     {
+        Debug.Log("points moved");
         float travelDirection;
         float bounceDistance;
         float bounceModifier = 0.6f;
@@ -35,21 +39,23 @@ public class Trajectory : MonoBehaviour
         Vector3 p5;
         Vector3 p6;
 
-        controlPoints[0].position = BallPhysics.returnStartPosition;
+        controlPoints[0].position = ball.returnStartPosition;
         startPoint = controlPoints[0].position;
 
         if (tableSide == "left")
             landPoint.x = Random.Range(-2.5f, 0);
         if (tableSide == "right")
             landPoint.x = Random.Range(2.5f, 0);
+        if (tableSide == "any")
+            landPoint.x = Random.Range(-2.5f, 2.5f);
 
-        if (rallyTurn == "opponent")
+        if (returningSide == "far")
         {
             p1.z = 1.5f;
             p2.z = -1;
             landPoint.z = Random.Range(-4.5f, -2.5f);
         }
-        if (rallyTurn == "player")
+        if (returningSide == "near")
         {
             p1.z = -1.5f;
             p2.z = 1;

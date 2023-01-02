@@ -5,17 +5,18 @@ public class BallPhysics : MonoBehaviour
 {
     [SerializeField] private Trajectory trajectory;
 
-    private float tParam = 0f;
-    private Vector3 objectPosition;
-    private int counter = 0;
     public bool coroutineAllowed = false;
     public bool hasHit = false;
-    public float speedModifier = 0.5f;
-    public static Vector3 returnStartPosition;
+    public float speedModifier = 1;
+    public Vector3 returnStartPosition;
+
+    private float tParam = 0f;
+    private Vector3 objectPosition;
+    private int coroutineCounter = 0;
 
     void Update()
     {
-        if (coroutineAllowed && counter == 0)
+        if (coroutineAllowed && coroutineCounter == 0)
         {
             StartCoroutine(GoByTheRoute());
         }
@@ -23,7 +24,7 @@ public class BallPhysics : MonoBehaviour
 
     private IEnumerator GoByTheRoute()
     {
-        counter++;
+        coroutineCounter++;
         coroutineAllowed = false;
 
         Vector3[] p = new Vector3[8];
@@ -51,7 +52,7 @@ public class BallPhysics : MonoBehaviour
             }
             tParam = 0;
         }
-        counter = 0;
+        coroutineCounter = 0;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -64,7 +65,7 @@ public class BallPhysics : MonoBehaviour
                 returnStartPosition = transform.position;
                 tParam = 0;
                 coroutineAllowed = true;
-                speedModifier += 0.05f;
+                //speedModifier += 0.05f;
             }
         }
     }

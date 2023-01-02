@@ -6,7 +6,7 @@ public class InputManager : MonoBehaviour
     private PlayerInput.InMatchActions inMatch;
     private Player player;
 
-    private void Awake()
+    void Awake()
     {
         playerInput = new PlayerInput();
         inMatch = playerInput.InMatch;
@@ -15,7 +15,7 @@ public class InputManager : MonoBehaviour
         inMatch.Swing.performed += ctx => StartCoroutine(player.Swing(inMatch.Swing.ReadValue<float>(), inMatch.Spin.ReadValue<float>()));
     }
 
-    private void Update()
+    void Update()
     {
         player.Move(inMatch.Movement.ReadValue<float>());
     }

@@ -3,17 +3,30 @@ using UnityEngine;
 
 public class TrainingBot : MonoBehaviour
 {
-    [SerializeField] private Trajectory trajectory;
-    [SerializeField] private BallPhysics ball;
+    private Trajectory trajectory;
+    private BallPhysics ball;
+
+    public float paddleOffset = 0.1f;
 
     private bool moving = false;
     private float targetPosition;
+    private float ballPath;
+    private float ballLandPoint;
+
+    void Awake()
+    {
+        trajectory = GameObject.Find("Trajectory").GetComponent<Trajectory>();
+        ball = GameObject.Find("Ball").GetComponent<BallPhysics>();
+    }
 
     private void Update()
     {
-        if (trajectory.controlPoints[3].position.z > 0 && targetPosition != trajectory.controlPoints[5].position.x + 1)
-            targetPosition = trajectory.controlPoints[5].position.x + 1;
-        if (!moving && transform.position.x != targetPosition)
+        ballPath = trajectory.controlPoints[5].position.x;
+        ballLandPoint = trajectory.controlPoints[3].position.z;
+
+        if (ballLandPoint > 0 && targetPosition != ballPath + paddleOffset)
+            targetPosition = ballPath + paddleOffset;
+        if (!moving && transform.position.x != targetPosition && ballLandPoint > 0)
             StartCoroutine(MoveToBall(targetPosition, 0.5f));
     }
 
@@ -33,10 +46,8 @@ public class TrainingBot : MonoBehaviour
         }
         lerpPosition.x = endPosition;
         transform.position = lerpPosition;
-        Debug.Log("Moved to ball");
         yield return new WaitUntil(() => ball.hasHit);
-        trajectory.MovePoints("any", "opponent", 0);
-        Debug.Log("Bot hit ball");
+        trajectory.MovePoints("any", "far", 0);
         moving = false;
     }
 }

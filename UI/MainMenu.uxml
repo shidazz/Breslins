@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/button.uss?fileID=7433441132597879392&amp;guid=c0109158417d6624b95a760e641bf9ab&amp;type=3#button" />
+    <ui:VisualElement style="flex-grow: 1; flex-direction: column; align-items: stretch; justify-content: space-between; flex-basis: auto; width: auto; height: auto;">
+        <ui:VisualElement style="justify-content: space-around; flex-basis: 30%; align-items: center; flex-direction: row; bottom: auto; flex-grow: 0; flex-shrink: 1;">
+            <ui:Button text="Matchmaking" display-tooltip-when-elided="true" name="Matchmaking" class="button" style="transform-origin: center; translate: 20px 0; font-size: 90px;" />
+            <ui:Button text="Training" display-tooltip-when-elided="true" name="Training" class="button" style="translate: -20px 0; font-size: 90px;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-basis: 15%; flex-direction: row; justify-content: space-around; align-items: center;">
+            <ui:Button text="Quit" display-tooltip-when-elided="true" name="Quit" class="button" style="width: 400px; height: 120px; font-size: 80px; white-space: nowrap; -unity-text-align: middle-center; translate: 0 -50px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

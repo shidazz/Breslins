@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-    public Animator animator;
+    private Animator animator;
 
     void Awake() 
     {
@@ -11,15 +11,12 @@ public class AnimationController : MonoBehaviour
 
     void FixedUpdate() 
     {
-        if (animator.GetBool("inSwing"))
-            animator.SetBool("inSwing", false);
+        //if (animator.GetFloat("swing") != 0)
+        //    animator.SetFloat("swing", 0);
     }
 
-    public void UpdateAnimations(string input)
+    public void UpdateAnimations(string parameter, float input)
     {
-        if (input == "Forehand")
-        {
-            animator.SetBool("inSwing", true);
-        }
+        //animator.SetFloat(parameter, input);
     }
 }

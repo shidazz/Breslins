@@ -5,30 +5,32 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private Trajectory trajectory;
     [SerializeField] private BallPhysics ball;
-
-    public  float speed = 5f;
+    
     private AnimationController anim;
 
-    private void Awake()
+    public  float speed = 5f;
+
+    void Awake()
     {
-        anim = GetComponentInChildren<AnimationController>();
+        anim = GetComponent<AnimationController>();
     }
 
     public void Move(float input)
     {
         transform.Translate(input * speed * Time.deltaTime, 0, 0);
+        //anim.UpdateAnimations("direction", input);
     }
 
     public IEnumerator Swing(float direction, float spin)
     {
-        anim.UpdateAnimations("Forehand");
-        Debug.Log("Swing");
+        anim.UpdateAnimations("swing", direction);
+        Debug.Log("swing");
         yield return new WaitUntil(() => ball.hasHit);
-        Debug.Log("Hit");
+        Debug.Log("hit");
         if (direction < 0)
-            trajectory.MovePoints("left", "player", spin);
+            trajectory.MovePoints("left", "near", spin);
         if (direction > 0)
-            trajectory.MovePoints("right", "player", spin);
+            trajectory.MovePoints("right", "near", spin);
     }
 
     public void ResetBall()
