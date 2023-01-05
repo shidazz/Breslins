@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class TrainingBot : MonoBehaviour
 {
-    private Trajectory trajectory;
-    private BallPhysics ball;
+    [SerializeField] private Trajectory trajectory;
+    [SerializeField] private BallPhysics ball;
 
     public float paddleOffset = 0.1f;
 
@@ -12,11 +12,11 @@ public class TrainingBot : MonoBehaviour
     private float targetPosition;
     private float ballPath;
     private float ballLandPoint;
+    private AnimationController anim;
 
     void Awake()
     {
-        trajectory = GameObject.Find("Trajectory").GetComponent<Trajectory>();
-        ball = GameObject.Find("Ball").GetComponent<BallPhysics>();
+        anim = GetComponent<AnimationController>();
     }
 
     private void Update()
@@ -28,6 +28,9 @@ public class TrainingBot : MonoBehaviour
             targetPosition = ballPath + paddleOffset;
         if (!moving && transform.position.x != targetPosition && ballLandPoint > 0)
             StartCoroutine(MoveToBall(targetPosition, 0.5f));
+
+        if (transform.position.z - ball.transform.position.z <= 2)
+            anim.UpdateAnimations("swing", 1);
     }
 
     private IEnumerator MoveToBall(float endPosition, float duration)

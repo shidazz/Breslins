@@ -11,12 +11,12 @@ public class AnimationController : MonoBehaviour
 
     void FixedUpdate() 
     {
-        //if (animator.GetFloat("swing") != 0)
-        //    animator.SetFloat("swing", 0);
+        if (animator.GetFloat("swing") != 0)
+            animator.SetFloat("swing", 0);
     }
 
     public void UpdateAnimations(string parameter, float input)
     {
-        //animator.SetFloat(parameter, input);
+        animator.SetFloat(parameter, input);
     }
 }
