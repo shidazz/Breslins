@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 33082296}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.5, z: -1}
+  m_LocalPosition: {x: 1, y: 4.5, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -192,6 +192,7 @@ MonoBehaviour:
   hasHit: 0
   speedModifier: 1
   returnStartPosition: {x: 0, y: 0, z: 0}
+  spinCoefficient: 0.8
 --- !u!54 &229237921
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -371,7 +372,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 468265147}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.5, z: -9}
+  m_LocalPosition: {x: 2.5, y: 3.5, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -402,7 +403,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 609155646}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: -6}
+  m_LocalPosition: {x: 2, y: 4, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -608,7 +609,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1351281739}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.5, z: -4}
+  m_LocalPosition: {x: 1.5, y: 2.5, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -733,7 +734,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1387552435}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.5, z: 1.5}
+  m_LocalPosition: {x: 0.5, y: 4.5, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -764,7 +765,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1392942483}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.5, z: -4}
+  m_LocalPosition: {x: 1.5, y: 2.5, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1120,7 +1121,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1936596029}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -11}
+  m_LocalPosition: {x: 3, y: 1, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1792,7 +1793,7 @@ GameObject:
   - component: {fileID: 9169358557552113089}
   m_Layer: 0
   m_Name: Paddle
-  m_TagString: Untagged
+  m_TagString: Paddle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4986,30 +4987,15 @@ GameObject:
   m_Component:
   - component: {fileID: 4970020533109719934}
   - component: {fileID: 1304112613572663556}
-  - component: {fileID: 5742898744665790917}
+  - component: {fileID: 5742898744665790919}
   - component: {fileID: 5742898744665790918}
   m_Layer: 0
   m_Name: PingPong_Man (1)
-  m_TagString: Untagged
+  m_TagString: Bot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &5742898744665790917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5742898744665790916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0358b95a6a3c5644b7669739b93d94d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trajectory: {fileID: 1974752719}
-  ball: {fileID: 229237920}
-  paddleOffset: -0.3
 --- !u!114 &5742898744665790918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5022,6 +5008,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212cff8323460af48935142b2c114672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5742898744665790919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5742898744665790916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e316d6682be477b419b7cf387a4b2ffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trajectory: {fileID: 1974752719}
+  ball: {fileID: 229237920}
+  paddleOffset: 0.3
+  botSpeed: 2
 --- !u!4 &5745108433954151850
 Transform:
   m_ObjectHideFlags: 0
@@ -5773,7 +5775,7 @@ GameObject:
   - component: {fileID: 6958641623645796375}
   m_Layer: 0
   m_Name: Paddle
-  m_TagString: Untagged
+  m_TagString: Paddle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5803,6 +5805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9350d692ecc44b43bb0a46193726eb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ball: {fileID: 229237920}
 --- !u!1 &6969591616758281866
 GameObject:
   m_ObjectHideFlags: 0
@@ -7230,6 +7233,7 @@ MonoBehaviour:
   trajectory: {fileID: 1974752719}
   ball: {fileID: 229237920}
   paddleOffset: -0.3
+  botSpeed: 2
 --- !u!114 &8885326916484091299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7529,6 +7533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9350d692ecc44b43bb0a46193726eb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ball: {fileID: 229237920}
 --- !u!1 &9187273016975887493
 GameObject:
   m_ObjectHideFlags: 0

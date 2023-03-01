@@ -743,7 +743,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619064564}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -830,6 +830,7 @@ MonoBehaviour:
   hasHit: 0
   speedModifier: 1
   returnStartPosition: {x: 0, y: 0, z: 0}
+  spinCoefficient: 1
 --- !u!54 &1619064570
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1633,7 +1634,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1057391610331429769}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 3, z: 6}
+  m_LocalPosition: {x: -0.1, y: 3, z: 6}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4959,7 +4960,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 0.5}
+  m_Size: {x: 3, y: 3, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5249624967492013823
 MonoBehaviour:
@@ -4973,6 +4974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9350d692ecc44b43bb0a46193726eb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ball: {fileID: 1619064569}
 --- !u!1 &5276054636293794534
 GameObject:
   m_ObjectHideFlags: 0
@@ -5560,7 +5562,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trajectory: {fileID: 1573986809}
   ball: {fileID: 1619064569}
-  paddleOffset: -0.3
+  paddleOffset: 0
+  botSpeed: 2
 --- !u!114 &5982856634702363467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7488,6 +7491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9350d692ecc44b43bb0a46193726eb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ball: {fileID: 1619064569}
 --- !u!1 &9113095545486602354
 GameObject:
   m_ObjectHideFlags: 0

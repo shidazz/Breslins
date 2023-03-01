@@ -9,6 +9,7 @@ public class BallPhysics : MonoBehaviour
     public bool hasHit = false;
     public float speedModifier = 1;
     public Vector3 returnStartPosition;
+    public float spinCoefficient = 1;
 
     private float tParam = 0f;
     private Vector3 objectPosition;
@@ -18,11 +19,11 @@ public class BallPhysics : MonoBehaviour
     {
         if (coroutineAllowed && coroutineCounter == 0)
         {
-            StartCoroutine(GoByTheRoute());
+            StartCoroutine(TravelTrajectory());
         }
     }
 
-    private IEnumerator GoByTheRoute()
+    private IEnumerator TravelTrajectory()
     {
         coroutineCounter++;
         coroutineAllowed = false;
@@ -42,7 +43,7 @@ public class BallPhysics : MonoBehaviour
 
                 transform.position = objectPosition;
 
-                yield return new WaitForEndOfFrame();
+                yield return new WaitForSeconds(0.000016f);
 
                 if (hasHit)
                 {
@@ -63,7 +64,6 @@ public class BallPhysics : MonoBehaviour
             {
                 hasHit = true;
                 returnStartPosition = transform.position;
-                tParam = 0;
                 coroutineAllowed = true;
                 //speedModifier += 0.05f;
             }

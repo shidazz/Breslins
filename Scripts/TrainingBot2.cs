@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TrainingBot : MonoBehaviour
+public class TrainingBot2 : MonoBehaviour
 {
     [SerializeField] private Trajectory trajectory;
     [SerializeField] private BallPhysics ball;
@@ -15,7 +15,7 @@ public class TrainingBot : MonoBehaviour
     private float ballPath;
     private float ballLandPoint;
     private AnimationController anim;
-    private float[] spinOptions = {-1, 0 , 1, 2};
+    private float[] spinOptions = { -1, 0, 1, 2 };
 
     void Awake()
     {
@@ -27,12 +27,12 @@ public class TrainingBot : MonoBehaviour
         ballPath = trajectory.controlPoints[5].position.x;
         ballLandPoint = trajectory.controlPoints[3].position.z;
 
-        if (ballLandPoint > 0 && targetPosition != ballPath + paddleOffset)
+        if (ballLandPoint < 0 && targetPosition != ballPath + paddleOffset)
             targetPosition = ballPath + paddleOffset;
-        if (!moving && transform.position.x != targetPosition && ballLandPoint > 0)
+        if (!moving && transform.position.x != targetPosition && ballLandPoint < 0)
             StartCoroutine(MoveToBall(targetPosition, 1 / botSpeed));
 
-        if (transform.position.z - ball.transform.position.z <= 2)
+        if (transform.position.z - ball.transform.position.z >= -2)
             anim.UpdateAnimations("swing", 1);
     }
 
@@ -60,7 +60,7 @@ public class TrainingBot : MonoBehaviour
         else
             spinOutput = Random.Range(0, spinOptions.Length);
         Debug.Log("bot spin: " + spinOptions[spinOutput]);
-        trajectory.MovePoints(0, "far", spinOptions[spinOutput]);
+        trajectory.MovePoints(0, "near", spinOptions[spinOutput]);
         moving = false;
     }
 }

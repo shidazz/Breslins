@@ -21,16 +21,19 @@ public class Player : MonoBehaviour
         //anim.UpdateAnimations("direction", input);
     }
 
+    public float Spin(float input)
+    {
+        return input;
+    }
+
     public IEnumerator Swing(float direction, float spin)
     {
         anim.UpdateAnimations("swing", direction);
         Debug.Log("swing");
         yield return new WaitUntil(() => ball.hasHit);
         Debug.Log("hit");
-        if (direction < 0)
-            trajectory.MovePoints("left", "near", spin);
-        if (direction > 0)
-            trajectory.MovePoints("right", "near", spin);
+        trajectory.MovePoints(direction, "near", spin);
+        Debug.Log("spin: " + spin);
     }
 
     public void ResetBall()

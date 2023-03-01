@@ -18,6 +18,7 @@ public class InputManager : MonoBehaviour
     void Update()
     {
         player.Move(inMatch.Movement.ReadValue<float>());
+        player.Spin(inMatch.Spin.ReadValue<float>());
     }
 
     private void OnEnable()
