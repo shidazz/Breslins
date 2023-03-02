@@ -5806,6 +5806,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 229237920}
+  anim: {fileID: 8885326916484091299}
 --- !u!1 &6969591616758281866
 GameObject:
   m_ObjectHideFlags: 0
@@ -7534,6 +7535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 229237920}
+  anim: {fileID: 5742898744665790918}
 --- !u!1 &9187273016975887493
 GameObject:
   m_ObjectHideFlags: 0

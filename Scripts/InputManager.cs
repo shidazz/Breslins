@@ -17,7 +17,7 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        player.Move(inMatch.Movement.ReadValue<float>());
+        player.Move(inMatch.Movement.ReadValue<Vector2>());
         player.Spin(inMatch.Spin.ReadValue<float>());
     }
 

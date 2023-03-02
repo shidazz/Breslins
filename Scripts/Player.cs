@@ -6,19 +6,24 @@ public class Player : MonoBehaviour
     [SerializeField] private Trajectory trajectory;
     [SerializeField] private BallPhysics ball;
     
-    private AnimationController anim;
-
     public  float speed = 5f;
+
+    private AnimationController anim;
 
     void Awake()
     {
         anim = GetComponent<AnimationController>();
     }
 
-    public void Move(float input)
+    void Update()
     {
-        transform.Translate(input * speed * Time.deltaTime, 0, 0);
-        //anim.UpdateAnimations("direction", input);
+        if (transform.position.z <= -6)
+            transform.Translate(0, 0, 1f * Time.deltaTime);
+    }
+
+    public void Move(Vector2 input)
+    {
+        transform.Translate(input.x * speed * Time.deltaTime, 0, input.y * speed * Time.deltaTime);
     }
 
     public float Spin(float input)
