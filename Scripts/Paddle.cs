@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class Paddle : MonoBehaviour
 {
-    [SerializeField] private BallPhysics ball;
-
+    private BallPhysics ball;
     private Animator animator;
     private BoxCollider hitbox;
     private bool collided = false;
@@ -12,6 +11,7 @@ public class Paddle : MonoBehaviour
     {
         animator = GetComponentInParent<Animator>();
         hitbox = GetComponent<BoxCollider>();
+        ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<BallPhysics>();
     }
 
     void Update()

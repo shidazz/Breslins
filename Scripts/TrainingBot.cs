@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class TrainingBot : MonoBehaviour
 {
-    [SerializeField] private Trajectory trajectory;
-    [SerializeField] private BallPhysics ball;
+    private Trajectory trajectory;
+    private BallPhysics ball;
 
     public float paddleOffset = 0.1f;
     public float botSpeed = 2f;
@@ -15,11 +15,13 @@ public class TrainingBot : MonoBehaviour
     private float ballPath;
     private float ballLandPoint;
     private AnimationController anim;
-    private float[] spinOptions = {-1, 0 , 1, 2};
+    private readonly float[] spinOptions = {-1, 0 , 1, 2};
 
     void Awake()
     {
         anim = GetComponent<AnimationController>();
+        trajectory = GameObject.FindGameObjectWithTag("Trajectory").GetComponent<Trajectory>();
+        ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<BallPhysics>();
     }
 
     private void Update()
@@ -42,7 +44,7 @@ public class TrainingBot : MonoBehaviour
         float time = 0;
         float startPosition = transform.position.x;
         int spinOutput;
-        Vector3 lerpPosition = new Vector3(startPosition, transform.position.y, transform.position.z);
+        Vector3 lerpPosition = new (startPosition, transform.position.y, transform.position.z);
 
         while (time < duration)
         {
@@ -54,12 +56,10 @@ public class TrainingBot : MonoBehaviour
         lerpPosition.x = endPosition;
         transform.position = lerpPosition;
         yield return new WaitUntil(() => ball.hasHit);
-        Debug.Log("bot hit");
         if (SceneManager.GetActiveScene().name == "Main Menu")
             spinOutput = 1;
         else
             spinOutput = Random.Range(0, spinOptions.Length);
-        Debug.Log("bot spin: " + spinOptions[spinOutput]);
         trajectory.MovePoints(0, "far", spinOptions[spinOutput]);
         moving = false;
     }

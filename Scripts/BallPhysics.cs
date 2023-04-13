@@ -3,17 +3,21 @@ using UnityEngine;
 
 public class BallPhysics : MonoBehaviour
 {
-    [SerializeField] private Trajectory trajectory;
-
     public bool coroutineAllowed = false;
     public bool hasHit = false;
-    public float speedModifier = 1;
+    public float speedModifier = Values.speedModifier;
     public Vector3 returnStartPosition;
-    public float spinCoefficient = 1;
+    public bool inPlay = false;
 
+    private Trajectory trajectory;
     private float tParam = 0f;
     private Vector3 objectPosition;
     private int coroutineCounter = 0;
+
+    void Awake()
+    {
+        trajectory = GameObject.FindGameObjectWithTag("Trajectory").GetComponent<Trajectory>();
+    }
 
     void Update()
     {

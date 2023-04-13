@@ -1,14 +1,28 @@
 using UnityEngine;
+using Unity.Netcode;
 
-public class Trajectory : MonoBehaviour
+public class Trajectory : NetworkBehaviour
 {
-    [SerializeField] public Transform[] controlPoints;
-    [SerializeField] private BallPhysics ball;
+    public Transform[] controlPoints;
+    public Vector3[] defaultPointPosition;
 
+    private BallPhysics ball;
     private Vector3 gizmosPosition1;
     private Vector3 gizmosPosition2;
 
-    
+    private readonly float spinCoefficient = Values.spinCoefficient;
+
+    void Awake()
+    {
+        ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<BallPhysics>();
+    }
+
+    void Start()
+    {
+        for (int i = 0; i < controlPoints.Length; i++) 
+            defaultPointPosition[i] = controlPoints[i].position;
+    }
+
     private void OnDrawGizmos()
     {
         for (float t = 0; t <= 1; t += 0.05f)
@@ -25,19 +39,17 @@ public class Trajectory : MonoBehaviour
         }
     }
     
-
     public void MovePoints(float tableSide, string returningSide, float spin)
     {
-        Debug.Log("points moved");
         float travelDirection;
         float bounceDistance;
         float bounceModifier = 0.6f;
         float topspin;
         float sidespin;
         Vector3 startPoint;
-        Vector3 p1 = new Vector3(0, 4.5f, -1.5f);
-        Vector3 p2 = new Vector3(0, 4.5f, 1);
-        Vector3 landPoint = new Vector3(0, 2.5f, 0);
+        Vector3 p1 = new (0, 4.5f, -1.5f);
+        Vector3 p2 = new (0, 4.3f, 1);
+        Vector3 landPoint = new (0, 2.5f, 0);
         Vector3 p5;
         Vector3 p6;
         Vector3 p7;
@@ -46,8 +58,10 @@ public class Trajectory : MonoBehaviour
         {
             topspin = 1;
             sidespin = 0;
-            if (ball.speedModifier <= 1.8f)
-                ball.speedModifier += 0.4f;
+            if (ball.speedModifier < Values.speedModifier + 0.1f)
+                ball.speedModifier += 0.1f;
+            else
+                ball.speedModifier = Values.speedModifier;
         }
         else
         {
@@ -56,34 +70,40 @@ public class Trajectory : MonoBehaviour
             ball.speedModifier = 1;
         }
 
-        sidespin *= ball.spinCoefficient;
-        topspin *= ball.spinCoefficient;
+        sidespin *= spinCoefficient;
+        topspin *= spinCoefficient;
 
         controlPoints[0].position = ball.returnStartPosition;
         startPoint = controlPoints[0].position;
 
-        if (tableSide < 0)
-            landPoint.x = Random.Range(-2.5f, 0);
-        if (tableSide > 0)
-            landPoint.x = Random.Range(2.5f, 0);
         if (tableSide == 0)
             landPoint.x = Random.Range(-2.5f, 2.5f);
 
         if (returningSide == "far")
         {
+            if (tableSide < 0)
+                landPoint.x = Random.Range(2.5f, 1);
+            if (tableSide > 0)
+                landPoint.x = Random.Range(-2.5f, -1);
+
             p1.z = 1.5f;
             p2.z = -1;
-            landPoint.z = Random.Range(-4.5f, -2.5f);
+            landPoint.z = -3.5f;
         }
-        if (returningSide == "near")
+        else if (returningSide == "near")
         {
+            if (tableSide < 0)
+                landPoint.x = Random.Range(-2.5f, -1);
+            if (tableSide > 0)
+                landPoint.x = Random.Range(2.5f, 1);
+
             p1.z = -1.5f;
             p2.z = 1;
-            landPoint.z = Random.Range(2.5f, 4.5f);
+            landPoint.z = 3.5f;
         }
 
         travelDirection = landPoint.x - startPoint.x;
-        spin *= Mathf.Sign(landPoint.z);
+        sidespin *= Mathf.Sign(landPoint.z);
 
         p1.x = (startPoint.x + landPoint.x) / 2;
 
@@ -95,6 +115,7 @@ public class Trajectory : MonoBehaviour
 
         p2.x -= sidespin;
         p2.y -= topspin / 2;
+        p2.z += topspin * 2 * Mathf.Sign(landPoint.z);
 
         controlPoints[1].position = p1;
         controlPoints[2].position = p2;

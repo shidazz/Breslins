@@ -1,12 +1,50 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/button.uss?fileID=7433441132597879392&amp;guid=c0109158417d6624b95a760e641bf9ab&amp;type=3#button" />
-    <ui:VisualElement style="flex-grow: 1; flex-direction: column; align-items: stretch; justify-content: space-between; flex-basis: auto; width: auto; height: auto;">
-        <ui:VisualElement style="justify-content: space-around; flex-basis: 30%; align-items: center; flex-direction: row; bottom: auto; flex-grow: 0; flex-shrink: 1;">
-            <ui:Button text="Matchmaking" display-tooltip-when-elided="true" name="Matchmaking" class="button" style="transform-origin: center; translate: 20px 0; font-size: 90px;" />
-            <ui:Button text="Training" display-tooltip-when-elided="true" name="Training" class="button" style="translate: -20px 0; font-size: 90px;" />
+    <UI>
+        <ui:VisualElement style="width: auto; height: auto; -unity-text-align: upper-center; align-items: center; justify-content: space-between;">
+            <ui:VisualElement name="MultiplayerMenu" style="position: relative; flex-grow: 1; height: 1080px; width: 1920px; display: none;">
+                <ui:VisualElement style="justify-content: space-around; flex-basis: 30%; align-items: center; flex-direction: row; bottom: auto; flex-grow: 0; flex-shrink: 1;">
+                    <ui:Button text="Host" display-tooltip-when-elided="true" name="Host" class="button" style="transform-origin: center; translate: 20px 0; font-size: 90px;" />
+                    <ui:Button text="Join" display-tooltip-when-elided="true" name="Join" class="button" style="translate: -20px 0; font-size: 90px;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-basis: 15%; flex-direction: row; justify-content: space-around; align-items: center; -unity-text-align: upper-left; position: relative; left: auto; bottom: auto; top: 55%;">
+                    <ui:Button text="Back" display-tooltip-when-elided="true" name="Back" class="button" style="width: 400px; height: 120px; font-size: 80px; white-space: nowrap; -unity-text-align: middle-center; translate: 0 -50px;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="JoinGameMenu" style="position: relative; flex-grow: 1; height: 1080px; width: 1920px; display: none; top: auto; left: auto;">
+                <ui:VisualElement style="justify-content: space-between; flex-basis: 30%; align-items: center; flex-direction: column; bottom: auto; flex-grow: 0; flex-shrink: 1; flex-wrap: nowrap; visibility: visible;">
+                    <ui:Button text="Join" display-tooltip-when-elided="true" name="JoinConfirm" class="button" style="translate: -20px 0; font-size: 90px; flex-direction: column; position: absolute; left: auto; top: 100%; bottom: auto; right: 30%;" />
+                    <ui:TextField picking-mode="Ignore" text="  Insert Code" is-delayed="false" name="JoinCode" readonly="false" class="button" style="width: 700px; height: 150px; flex-direction: row; justify-content: flex-start; -unity-text-align: upper-center; white-space: nowrap; overflow: hidden; font-size: 100px; align-items: center; -unity-font-style: bold;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-basis: 15%; flex-direction: row; justify-content: space-around; align-items: center; -unity-text-align: upper-left; position: relative; left: auto; bottom: auto; top: 55%;">
+                    <ui:Button text="Back" display-tooltip-when-elided="true" name="BackToMPJ" class="button" style="width: 400px; height: 120px; font-size: 80px; white-space: nowrap; -unity-text-align: middle-center; translate: 0 -50px;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="HostSettings" style="position: relative; flex-grow: 1; height: 1080px; width: 1920px; display: none; top: auto; left: auto; align-items: center; justify-content: flex-start;">
+                <ui:Label text="Host Settings" display-tooltip-when-elided="true" class="button" style="flex-direction: column; align-items: center; justify-content: center; -unity-text-align: upper-center; position: absolute; top: 5%; background-color: rgba(0, 0, 0, 0); font-size: 100px;" />
+                <ui:VisualElement style="justify-content: space-around; flex-basis: 30%; align-items: center; flex-direction: column; bottom: auto; flex-grow: 0; flex-shrink: 1; flex-wrap: nowrap; visibility: visible; top: 20%; position: relative;">
+                    <ui:Button text="Start" display-tooltip-when-elided="true" name="StartHost" class="button" style="position: absolute; font-size: 100px; width: 500px; height: 120px; top: 120%;" />
+                    <ui:TextField picking-mode="Ignore" label="Spin Coefficient" value="1" text="1" is-delayed="false" max-length="-1" password="false" name="Spin" class="button" style="width: 600px; height: 60px; font-size: 50px; justify-content: flex-start; align-items: stretch; flex-direction: row; letter-spacing: 2px; margin-left: 3px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; position: relative; -unity-text-outline-color: rgb(0, 0, 0); background-color: rgba(0, 0, 0, 0); word-spacing: 0; -unity-paragraph-spacing: 0;" />
+                    <ui:TextField picking-mode="Ignore" label="Ball Speed" value="1" text="1" name="BallSpeed" class="button" style="width: 600px; height: 60px; font-size: 50px; -unity-text-outline-color: rgb(0, 0, 0); background-color: rgba(0, 0, 0, 0);" />
+                    <ui:TextField picking-mode="Ignore" label="Player Speed" value="5" text="5" name="PlayerSpeed" class="button" style="width: 600px; height: 60px; font-size: 50px; background-color: rgba(0, 0, 0, 0);" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-basis: 15%; flex-direction: row; justify-content: center; align-items: center; -unity-text-align: upper-left; position: relative; left: auto; bottom: auto; top: 55%;">
+                    <ui:Button text="Back" display-tooltip-when-elided="true" name="BackToMPH" class="button" style="width: 400px; height: 120px; font-size: 80px; white-space: nowrap; -unity-text-align: middle-center; translate: 0 -50px;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="MainMenu" style="flex-grow: 1; height: 1080px; display: flex; width: 1920px;">
+                <ui:VisualElement style="justify-content: space-around; flex-basis: 30%; align-items: center; flex-direction: row; bottom: auto; flex-grow: 0; flex-shrink: 1;">
+                    <ui:Button text="Play" display-tooltip-when-elided="true" name="Play" class="button" style="transform-origin: center; translate: 20px 0; font-size: 90px;" />
+                    <ui:Button text="Training" display-tooltip-when-elided="true" name="Training" class="button" style="translate: -20px 0; font-size: 90px;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-basis: 15%; flex-direction: row; justify-content: space-around; align-items: center; -unity-text-align: upper-left; position: relative; left: auto; bottom: auto; top: 55%;">
+                    <ui:Button text="Quit" display-tooltip-when-elided="true" name="Quit" class="button" style="width: 400px; height: 120px; font-size: 80px; white-space: nowrap; -unity-text-align: middle-center; translate: 0 -50px;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:Label display-tooltip-when-elided="true" name="Code" class="button" style="font-size: 40px; background-color: rgba(0, 0, 0, 0); width: 400px; height: 50px; display: flex; align-items: center; flex-direction: column; -unity-text-align: upper-center; white-space: nowrap; justify-content: flex-end; left: 0; position: absolute; top: 950px; bottom: 0; right: 0;" />
+            <ui:Label text="Controls:" display-tooltip-when-elided="true" name="ControlsGamepad" enable-rich-text="true" style="font-size: 100px; -unity-text-outline-width: 1px; -unity-font-style: bold; align-items: flex-start; justify-content: space-around; display: none;">
+                <ui:Label text="Left Button hits to the left&#10;Right Button hits to the right&#10;&#10;Left stick to move left, right, and back&#10;&#10;Left and Right Bumpers for spin:&#10;Hold Left or Right for sidespin, &#10;Hold Both for topspin&#10;&#10;Start Button to serve the ball" display-tooltip-when-elided="true" style="align-items: flex-start; justify-content: flex-end; left: auto; top: 25%; -unity-font-style: normal; font-size: 60px; -unity-text-align: upper-center;" />
+            </ui:Label>
         </ui:VisualElement>
-        <ui:VisualElement style="flex-basis: 15%; flex-direction: row; justify-content: space-around; align-items: center;">
-            <ui:Button text="Quit" display-tooltip-when-elided="true" name="Quit" class="button" style="width: 400px; height: 120px; font-size: 80px; white-space: nowrap; -unity-text-align: middle-center; translate: 0 -50px;" />
-        </ui:VisualElement>
-    </ui:VisualElement>
+    </UI>
 </ui:UXML>

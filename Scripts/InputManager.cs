@@ -11,8 +11,8 @@ public class InputManager : MonoBehaviour
         playerInput = new PlayerInput();
         inMatch = playerInput.InMatch;
         player = GetComponent<Player>();
-        inMatch.ResetBall.performed += ctx => player.ResetBall();
-        inMatch.Swing.performed += ctx => StartCoroutine(player.Swing(inMatch.Swing.ReadValue<float>(), inMatch.Spin.ReadValue<float>()));
+        inMatch.ResetBall.performed += ctx => player.Serve();
+        inMatch.Swing.performed += ctx => player.ProcessSwing(inMatch.Swing.ReadValue<float>(), inMatch.Spin.ReadValue<float>());
     }
 
     void Update()
