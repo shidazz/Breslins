@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/button.uss?fileID=7433441132597879392&amp;guid=c0109158417d6624b95a760e641bf9ab&amp;type=3#button" />
     <UI>
-        <ui:VisualElement style="width: auto; height: auto; -unity-text-align: upper-center; align-items: center; justify-content: space-between;">
+        <ui:VisualElement name="Root" style="width: auto; height: auto; -unity-text-align: upper-center; align-items: center; justify-content: space-between;">
             <ui:VisualElement name="MultiplayerMenu" style="position: relative; flex-grow: 1; height: 1080px; width: 1920px; display: none;">
                 <ui:VisualElement style="justify-content: space-around; flex-basis: 30%; align-items: center; flex-direction: row; bottom: auto; flex-grow: 0; flex-shrink: 1;">
                     <ui:Button text="Host" display-tooltip-when-elided="true" name="Host" class="button" style="transform-origin: center; translate: 20px 0; font-size: 90px;" />
@@ -34,7 +34,7 @@
             </ui:VisualElement>
             <ui:VisualElement name="MainMenu" style="flex-grow: 1; height: 1080px; display: flex; width: 1920px;">
                 <ui:VisualElement style="justify-content: space-around; flex-basis: 30%; align-items: center; flex-direction: row; bottom: auto; flex-grow: 0; flex-shrink: 1;">
-                    <ui:Button text="Play" display-tooltip-when-elided="true" name="Play" class="button" style="transform-origin: center; translate: 20px 0; font-size: 90px;" />
+                    <ui:Button text="Multiplayer" display-tooltip-when-elided="true" name="Play" class="button" style="transform-origin: center; translate: 20px 0; font-size: 90px;" />
                     <ui:Button text="Training" display-tooltip-when-elided="true" name="Training" class="button" style="translate: -20px 0; font-size: 90px;" />
                 </ui:VisualElement>
                 <ui:VisualElement style="flex-basis: 15%; flex-direction: row; justify-content: space-around; align-items: center; -unity-text-align: upper-left; position: relative; left: auto; bottom: auto; top: 55%;">
@@ -45,6 +45,20 @@
             <ui:Label text="Controls:" display-tooltip-when-elided="true" name="ControlsGamepad" enable-rich-text="true" style="font-size: 100px; -unity-text-outline-width: 1px; -unity-font-style: bold; align-items: flex-start; justify-content: space-around; display: none;">
                 <ui:Label text="Left Button hits to the left&#10;Right Button hits to the right&#10;&#10;Left stick to move left, right, and back&#10;&#10;Left and Right Bumpers for spin:&#10;Hold Left or Right for sidespin, &#10;Hold Both for topspin&#10;&#10;Start Button to serve the ball" display-tooltip-when-elided="true" style="align-items: flex-start; justify-content: flex-end; left: auto; top: 25%; -unity-font-style: normal; font-size: 60px; -unity-text-align: upper-center;" />
             </ui:Label>
+            <ui:VisualElement name="Score" style="flex-direction: row; flex-wrap: nowrap; align-items: auto; justify-content: flex-end; display: none;">
+                <ui:Label text="Player 1: &#10;0" display-tooltip-when-elided="true" name="Player1" class="button" style="font-size: 100px; flex-direction: column; left: auto; right: 10%; -unity-font-style: bold; -unity-text-outline-width: 2px; background-color: rgba(0, 0, 0, 0); top: 20%;" />
+                <ui:Label text="Player 2: &#10;0" display-tooltip-when-elided="true" name="Player2" class="button" style="font-size: 100px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; right: auto; left: 10%; -unity-text-outline-width: 2px; -unity-font-style: bold; background-color: rgba(0, 0, 0, 0); top: 20%;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="PauseMenu" style="flex-grow: 1; height: 1080px; display: none; width: 1920px; flex-direction: row-reverse; align-items: stretch; justify-content: space-between; -unity-background-image-tint-color: rgb(255, 255, 255); background-color: rgba(0, 0, 0, 0.12); position: absolute;">
+                <ui:Label text="Paused" display-tooltip-when-elided="true" style="top: 0; bottom: auto; font-size: 150px; right: 35%; flex-direction: column; -unity-font-style: bold; -unity-text-outline-width: 4px; letter-spacing: 1px;" />
+                <ui:VisualElement style="flex-grow: 0; width: 10%; -unity-text-align: upper-center; right: auto; justify-content: center; left: 40%;">
+                    <ui:Slider picking-mode="Ignore" label="Music" value="0.3" high-value="1" direction="Vertical" name="MusicSlider" style="left: auto; flex-basis: auto; width: 47px; right: 20%; top: 10%; bottom: auto; height: 40%; flex-direction: column; justify-content: flex-end; align-items: center; font-size: 100px; color: rgb(255, 255, 255); -unity-font-style: bold; -unity-text-outline-width: 3px;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="justify-content: space-around; flex-basis: 30%; align-items: center; flex-direction: column; bottom: auto; flex-grow: 0; flex-shrink: 1; height: 100%;">
+                    <ui:Button text="Resume" display-tooltip-when-elided="true" name="Resume" enable-rich-text="true" class="button" style="left: 30%; font-size: 100px; top: 10%; bottom: auto;" />
+                    <ui:Button text="Exit Match" display-tooltip-when-elided="true" name="Exit" class="button" style="left: 30%; font-size: 100px; top: auto; bottom: 0;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
         </ui:VisualElement>
     </UI>
 </ui:UXML>

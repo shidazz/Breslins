@@ -16,6 +16,7 @@ public class TrainingBot : MonoBehaviour
     private float ballLandPoint;
     private AnimationController anim;
     private readonly float[] spinOptions = {-1, 0 , 1, 2};
+    private readonly Vector3 startPos = new (-0.1f, 3, 6);
 
     void Awake()
     {
@@ -34,8 +35,11 @@ public class TrainingBot : MonoBehaviour
         if (!moving && transform.position.x != targetPosition && ballLandPoint > 0)
             StartCoroutine(MoveToBall(targetPosition, 1 / botSpeed));
 
-        if (transform.position.z - ball.transform.position.z <= 2)
+        if (transform.position.z - ball.transform.position.z <= 2 && transform.position.z - ball.transform.position.z >= -1)
             anim.UpdateAnimations("swing", 1);
+
+        if (ball.transform.position.y <= 1)
+            transform.position = startPos;
     }
 
     private IEnumerator MoveToBall(float endPosition, float duration)

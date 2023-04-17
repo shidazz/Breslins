@@ -10,7 +10,7 @@ public class Trajectory : NetworkBehaviour
     private Vector3 gizmosPosition1;
     private Vector3 gizmosPosition2;
 
-    private readonly float spinCoefficient = Values.spinCoefficient;
+    private float spinCoefficient;
 
     void Awake()
     {
@@ -19,6 +19,8 @@ public class Trajectory : NetworkBehaviour
 
     void Start()
     {
+        spinCoefficient = Values.spinCoefficient;
+
         for (int i = 0; i < controlPoints.Length; i++) 
             defaultPointPosition[i] = controlPoints[i].position;
     }
@@ -67,7 +69,7 @@ public class Trajectory : NetworkBehaviour
         {
             sidespin = spin;
             topspin = 0;
-            ball.speedModifier = 1;
+            ball.speedModifier = Values.speedModifier;
         }
 
         sidespin *= spinCoefficient;

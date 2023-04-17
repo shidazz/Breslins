@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    private PlayerInput playerInput;
+    public static PlayerInput playerInput;
     private PlayerInput.InMatchActions inMatch;
     private Player player;
 

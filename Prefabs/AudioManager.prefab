@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4155618399198694319}
   m_Layer: 0
   m_Name: AudioManager
-  m_TagString: Untagged
+  m_TagString: AudioManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,8 +46,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: MenuMusic
-    clip: {fileID: 8300000, guid: f330ada912924bb4b8872503e1bc60cc, type: 3}
-    volume: 0
+    clip: {fileID: 8300000, guid: c66e7ec78eb4bd2488e86b65df90b16c, type: 3}
+    volume: 0.5
     pitch: 1
     loop: 1
+    source: {fileID: 0}
+  - name: PaddleHit_1
+    clip: {fileID: 8300000, guid: 89dabcee21a9a954f93426199bfb8a77, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PaddleHit_2
+    clip: {fileID: 8300000, guid: 8ffc59d7211d7fa4fafbfdabdd0308cf, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: TableHit_1
+    clip: {fileID: 8300000, guid: c067d92d3da873a4188218eac014e9fd, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
     source: {fileID: 0}

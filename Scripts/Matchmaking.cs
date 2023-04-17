@@ -12,6 +12,7 @@ public class Matchmaking : MonoBehaviour
     private UnityTransport transport;
 
     private const int MaxPlayers = 2;
+    private static bool authenticated = false;
 
     private async void Awake()
     {
@@ -21,8 +22,12 @@ public class Matchmaking : MonoBehaviour
 
     private static async Task Authenticate()
     {
-        await UnityServices.InitializeAsync();
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        if (!authenticated)
+        {
+            authenticated = true;
+            await UnityServices.InitializeAsync();
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        }
     }
 
     public async void HostGame()
@@ -42,5 +47,10 @@ public class Matchmaking : MonoBehaviour
         transport.SetClientRelayData(a.RelayServer.IpV4, (ushort)a.RelayServer.Port, a.AllocationIdBytes, a.Key, a.ConnectionData, a.HostConnectionData);
 
         NetworkManager.Singleton.StartClient();
+    }
+
+    public void ExitMatch()
+    {
+        NetworkManager.Singleton.Shutdown();
     }
 }

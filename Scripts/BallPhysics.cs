@@ -1,15 +1,18 @@
 using System.Collections;
 using UnityEngine;
+using Unity.Netcode;
 
 public class BallPhysics : MonoBehaviour
 {
     public bool coroutineAllowed = false;
     public bool hasHit = false;
-    public float speedModifier = Values.speedModifier;
+    public float speedModifier;
     public Vector3 returnStartPosition;
-    public bool inPlay = false;
+    public static int player1Score = 0;
+    public static int player2Score = 0;
 
     private Trajectory trajectory;
+    private AudioManager audioManager;
     private float tParam = 0f;
     private Vector3 objectPosition;
     private int coroutineCounter = 0;
@@ -17,6 +20,12 @@ public class BallPhysics : MonoBehaviour
     void Awake()
     {
         trajectory = GameObject.FindGameObjectWithTag("Trajectory").GetComponent<Trajectory>();
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+    }
+
+    void Start()
+    {
+        speedModifier = Values.speedModifier;
     }
 
     void Update()
@@ -55,6 +64,22 @@ public class BallPhysics : MonoBehaviour
                     break;
                 }
             }
+            if (!hasHit && transform.position.y <= 1)
+            {
+                Player.inPlay = false;
+
+                if (transform.position.z > 0)
+                {
+                    player1Score++;
+                    UI.player1.text = Player.p1scoreLabel + player1Score;
+                }
+                if (transform.position.z < 0)
+                {
+                    player2Score++;
+                    UI.player2.text = Player.p2scoreLabel + player2Score;
+                }
+            }
+
             tParam = 0;
         }
         coroutineCounter = 0;
@@ -66,11 +91,21 @@ public class BallPhysics : MonoBehaviour
         {
             if (collision.gameObject.CompareTag("Paddle")) 
             {
+                if (transform.position.z < 0)
+                    audioManager.Play("PaddleHit_1");
+                if (transform.position.z > 0)
+                    audioManager.Play("PaddleHit_2");
                 hasHit = true;
                 returnStartPosition = transform.position;
                 coroutineAllowed = true;
                 //speedModifier += 0.05f;
             }
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Table"))
+            audioManager.Play("TableHit_1");
     }
 }

@@ -5,12 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class Player : NetworkBehaviour
 {
+    public static string p1scoreLabel;
+    public static string p2scoreLabel;
+    public static bool inPlay = false;
+
     private Trajectory trajectory;
     private BallPhysics ball;
     private AnimationController anim;
     private string returningSide;
     private bool multiplayerEnabled;
-    private readonly float speed = Values.playerSpeed;
+    private float speed;
 
     void Awake()
     {
@@ -22,11 +26,26 @@ public class Player : NetworkBehaviour
     void Start()
     {
         returningSide = "far";
+        speed = Values.playerSpeed;
 
         if (SceneManager.GetActiveScene().name == "Training" || SceneManager.GetActiveScene().name == "MainMenu")
             multiplayerEnabled = false;
         else if (SceneManager.GetActiveScene().name == "Match")
             multiplayerEnabled = true;
+
+        if (multiplayerEnabled)
+        {
+            p1scoreLabel = "Player 1: \n";
+            p2scoreLabel = "Player 2: \n";
+        }
+        else
+        {
+            p1scoreLabel = "You: \n";
+            p2scoreLabel = "Bot: \n";
+        }
+
+        UI.player1.text = p1scoreLabel + "0";
+        UI.player2.text = p2scoreLabel + "0";
     }
 
     public override void OnNetworkSpawn()
@@ -129,15 +148,20 @@ public class Player : NetworkBehaviour
 
     public void Serve()
     {
-        if (multiplayerEnabled)
+        if (!inPlay)
         {
-            if (IsHost)
+            inPlay = true;
+
+            if (multiplayerEnabled)
             {
-                ResetBall();
+                if (IsHost)
+                {
+                    ResetBall();
+                }
             }
+            else
+                ResetBall();
         }
-        else
-            ResetBall();
     }
 
     private void ResetBall()

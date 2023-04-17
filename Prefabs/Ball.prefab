@@ -118,7 +118,6 @@ MonoBehaviour:
   hasHit: 0
   speedModifier: 1
   returnStartPosition: {x: 0, y: 0, z: 0}
-  spinCoefficient: 0.5
 --- !u!54 &6097670130889449728
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -172,7 +171,7 @@ MonoBehaviour:
   SyncScaleX: 0
   SyncScaleY: 0
   SyncScaleZ: 0
-  PositionThreshold: 0.001
+  PositionThreshold: 1e-10
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
   InLocalSpace: 0

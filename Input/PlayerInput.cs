@@ -62,6 +62,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""a0879bd5-044c-4759-ba92-d26ae1485c6a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -372,6 +381,28 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""Spin"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cf0c06c6-66fe-4e3d-b4f4-ceaab2bd9380"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""20d5f1ce-0afa-427e-9e0d-5b1e82b198bb"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -384,6 +415,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_InMatch_Swing = m_InMatch.FindAction("Swing", throwIfNotFound: true);
         m_InMatch_ResetBall = m_InMatch.FindAction("Reset Ball", throwIfNotFound: true);
         m_InMatch_Spin = m_InMatch.FindAction("Spin", throwIfNotFound: true);
+        m_InMatch_Pause = m_InMatch.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -447,6 +479,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_InMatch_Swing;
     private readonly InputAction m_InMatch_ResetBall;
     private readonly InputAction m_InMatch_Spin;
+    private readonly InputAction m_InMatch_Pause;
     public struct InMatchActions
     {
         private @PlayerInput m_Wrapper;
@@ -455,6 +488,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Swing => m_Wrapper.m_InMatch_Swing;
         public InputAction @ResetBall => m_Wrapper.m_InMatch_ResetBall;
         public InputAction @Spin => m_Wrapper.m_InMatch_Spin;
+        public InputAction @Pause => m_Wrapper.m_InMatch_Pause;
         public InputActionMap Get() { return m_Wrapper.m_InMatch; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -476,6 +510,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Spin.started -= m_Wrapper.m_InMatchActionsCallbackInterface.OnSpin;
                 @Spin.performed -= m_Wrapper.m_InMatchActionsCallbackInterface.OnSpin;
                 @Spin.canceled -= m_Wrapper.m_InMatchActionsCallbackInterface.OnSpin;
+                @Pause.started -= m_Wrapper.m_InMatchActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_InMatchActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_InMatchActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_InMatchActionsCallbackInterface = instance;
             if (instance != null)
@@ -492,6 +529,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Spin.started += instance.OnSpin;
                 @Spin.performed += instance.OnSpin;
                 @Spin.canceled += instance.OnSpin;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -502,5 +542,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnSwing(InputAction.CallbackContext context);
         void OnResetBall(InputAction.CallbackContext context);
         void OnSpin(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }
